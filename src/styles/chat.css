@@ -1,0 +1,184 @@
+/* ---------- Panels (not configured / picker / busy / error) ---------- */
+.panel {
+  max-width: 620px; margin: var(--s6) auto;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-soft);
+  padding: var(--s6);
+  display: flex; flex-direction: column; gap: var(--s3);
+}
+.panel h2 { font-size: var(--fs-2xl); }
+.panel__icon { color: var(--rani); }
+.panel__lead { color: var(--ink-soft); }
+.panel__steps { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--s3); }
+.panel__tech {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs); background: var(--cream); border: 1px solid var(--line);
+  border-radius: var(--r-sm); padding: var(--s3); word-break: break-word;
+}
+.panel__actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s2); }
+.panel--busy { align-items: center; text-align: center; color: var(--plum); }
+.panel code, .chat-bar code {
+  background: var(--blush); color: var(--plum); border-radius: var(--r-xs); padding: 1px 6px; font-size: 0.9em;
+}
+kbd { background: var(--lavender); border-radius: var(--r-xs); padding: 1px 6px; font-size: 0.9em; }
+
+.spin { animation: spin 1s linear infinite; color: var(--rani); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--s3); margin-top: var(--s2); }
+.picker__item {
+  display: flex; align-items: center; gap: var(--s3); text-align: left;
+  background: var(--cream); border: 1.5px solid var(--line); border-radius: var(--r-md);
+  padding: var(--s3) var(--s4); color: var(--ink);
+  transition: border-color var(--t-base) var(--ease), transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+.picker__item:hover { border-color: var(--rani); transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.picker__item strong { display: block; }
+.picker__item small { color: var(--ink-soft); }
+.picker__avatar {
+  flex: none; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 700; color: var(--plum);
+  background: var(--blush);
+}
+.picker__avatar--1 { background: var(--lavender); }
+.picker__avatar--2 { background: var(--peach-soft); }
+.picker__avatar--3 { background: var(--success-soft); }
+.picker__avatar--4 { background: var(--blush-deep); }
+
+/* ---------- The live chat ---------- */
+.content--chat { display: flex; flex-direction: column; overflow: hidden; }
+.content--chat > .chat-page { flex: 1; min-height: 0; }
+
+.chat-page { display: flex; flex-direction: column; gap: var(--s3); max-width: 1080px; width: 100%; margin: 0 auto; }
+.chat-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+.chat-bar p { color: var(--ink-soft); }
+.chat-bar strong { color: var(--plum); }
+.btn--small { padding: 7px 14px; font-size: var(--fs-sm); }
+
+.chat-shell {
+  flex: 1; min-height: 0;
+  border: 1px solid var(--line); border-radius: var(--r-lg);
+  overflow: hidden; background: var(--paper); box-shadow: var(--shadow-soft);
+}
+.chat-shell .cometchat { height: 100%; }
+.chat-window { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+
+/* Paint the CometChat UI in OGSlides colours using the kit's own design tokens. */
+.chat-shell .cometchat,
+.chat-shell .cometchat[data-theme] {
+  --cometchat-primary-color: var(--rani-strong);
+  --cometchat-extended-primary-color-500: var(--rani-strong);
+  --cometchat-extended-primary-color-50: var(--blush);
+  --cometchat-font-family: var(--font-body);
+  --cometchat-message-list-bg: var(--cream);
+}
+
+/* Team chat borrows the teal "collaboration" accent from the page. */
+.chat-bar { background: var(--accent-soft); border-radius: var(--r-md); padding: var(--s2) var(--s4); }
+.chat-bar p, .chat-bar strong { color: var(--accent-ink); }
+.chat-shell { border-top: 4px solid var(--accent); }
+
+/* Voice-note hint above the composer */
+.voice-tip { display: flex; align-items: center; gap: var(--s2); margin: 0; padding: var(--s2) var(--s4); font-size: var(--fs-xs); color: var(--teal-ink); background: var(--teal-soft); border-top: 1px solid var(--line); }
+.voice-tip svg { flex: none; color: var(--teal-strong); }
+.voice-tip--off { color: var(--warn-ink); background: var(--warn-soft); }
+.voice-tip--off svg { color: var(--warn-ink); }
+
+/* ---------- Voice room (calls) ---------- */
+/* The SDK's media element: kept in the page on every route, but invisible. Audio still plays. */
+.call-stage { position: absolute; left: -9999px; top: 0; width: 320px; height: 240px; overflow: hidden; pointer-events: none; }
+.call-stage--video { position: relative; left: auto; top: auto; width: 100%; height: 200px; pointer-events: auto; background: var(--plum-deep); }
+.calldock--video { width: min(360px, calc(100vw - 32px)); }
+.calldock--large { width: min(680px, calc(100vw - 32px)); }
+.calldock--large .call-stage--video { height: min(420px, 50vh); }
+.calldock__headbtns { display: flex; gap: 2px; }
+.calldock__note { margin: 0; padding: 8px 14px; font-size: 12px; color: var(--ink-soft); background: var(--violet-soft); }
+.calldock__invite { padding: 0 10px 12px; }
+.calldock__invite .btn { width: 100%; justify-content: center; min-height: 40px; }
+.voicebtns { display: inline-flex; gap: 6px; }
+.calldock[hidden] { display: none; }
+
+.voicebtn { gap: 6px; white-space: nowrap; }
+.voicebtn--live { box-shadow: inset 0 0 0 1.5px var(--teal-strong); color: var(--teal-ink); background: var(--teal-soft); }
+
+.calldock {
+  position: fixed; right: 16px; bottom: 16px; z-index: var(--z-toast);
+  width: min(300px, calc(100vw - 32px));
+  background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--teal);
+  border-radius: var(--r-lg, 16px); box-shadow: var(--shadow-lift); overflow: hidden;
+}
+.calldock--warn { border-top-color: var(--violet, #7c5cd6); }
+.calldock--bad { border-top-color: var(--danger); }
+.calldock__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 10px 10px 14px; }
+.calldock__state { display: flex; align-items: center; gap: 10px; min-width: 0; color: var(--plum); }
+.calldock__state strong { display: block; font-size: var(--fs-sm); }
+.calldock__state small { display: block; color: var(--ink-soft, #6b5560); font-size: 12px; }
+.calldock__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal-strong); box-shadow: 0 0 0 4px var(--teal-soft); flex: none; }
+.calldock--warn .calldock__dot { background: var(--violet, #7c5cd6); box-shadow: none; }
+.calldock__error { padding: 0 14px 12px; font-size: var(--fs-sm); }
+.calldock__error p { margin: 0 0 8px; }
+.calldock__tech { color: var(--ink-soft, #6b5560); font-size: 12px; word-break: break-word; }
+.calldock__people { list-style: none; margin: 0; padding: 0 10px 8px; max-height: 40vh; overflow: auto; display: grid; gap: 4px; }
+.calldock__person { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: var(--r-md); }
+.calldock__person .avatar { border-radius: 50%; object-fit: cover; }
+.calldock__person.is-speaking { background: var(--mint-soft); box-shadow: inset 0 0 0 2px var(--mint-deep); }
+.calldock__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-sm); color: var(--plum); }
+.calldock__speaking { font-size: 12px; color: var(--mint-deep); font-weight: 600; }
+.calldock__muted { color: var(--danger); flex: none; }
+.calldock__empty { font-size: 13px; color: var(--ink-soft, #6b5560); padding: 6px 8px; }
+.calldock__controls { display: flex; gap: 8px; padding: 8px 10px 12px; }
+.calldock__controls .btn { flex: 1; justify-content: center; min-height: 40px; }
+@media (max-width: 720px) { .voicebtn__text { display: none; } .voicebtn { min-width: 44px; min-height: 44px; justify-content: center; } .calldock { bottom: 72px; } .call-stage--video { height: 160px; } }
+@media (prefers-reduced-motion: reduce) { .calldock * { animation: none !important; } }
+/* While the voice panel is open, notifications move to the top so they never cover its buttons. */
+body:has(.calldock) .toasts { bottom: auto; top: 76px; }
+
+/* ---------- Voice-note recorder (OGSlides' own, uses the chat kit's recorder) ---------- */
+.voicenote { padding: 8px 12px; background: var(--cream); border-top: 1px solid var(--line); }
+.voicenote__row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.voicenote__hint { font-size: var(--fs-xs); color: var(--ink-soft); }
+.voicenote__rec { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.voicenote__rec > :first-child { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+.voicenote__check { display: flex; align-items: flex-start; gap: 6px; margin: 8px 0 0; font-size: var(--fs-xs); line-height: 1.4; }
+.voicenote__check.is-ok { color: var(--success-ink); }
+.voicenote__check.is-bad { color: var(--danger); }
+.calldock.calldock--video { width: min(360px, calc(100vw - 32px)); }
+.calldock.calldock--large { width: min(680px, calc(100vw - 32px)); }
+.calldock__controls { flex-wrap: wrap; }
+.calldock__controls .btn { flex: 1 1 90px; white-space: nowrap; padding-inline: 10px; }
+
+/* ---------- One-to-one calls: ringing cards and teammate picker ---------- */
+.ringcard {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: var(--z-toast);
+  width: min(420px, calc(100vw - 24px)); padding: 16px;
+  background: var(--paper); border: 1px solid var(--line); border-top: 5px solid var(--rani);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-lift);
+  display: grid; gap: 14px; animation: pop var(--t-base) var(--ease);
+}
+.ringcard--out { border-top-color: var(--violet); }
+.ringcard__who { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.ringcard__who .avatar { border-radius: 50%; object-fit: cover; }
+.ringcard__pulse { display: inline-flex; border-radius: 50%; animation: ringpulse 1.6s ease-out infinite; }
+.ringcard__title { margin: 0; font-family: var(--font-display, inherit); font-weight: 700; font-size: var(--fs-lg, 1.125rem); color: var(--plum); overflow-wrap: anywhere; }
+.ringcard__sub { margin: 2px 0 0; display: flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--ink-soft); }
+.ringcard__note { margin: 4px 0 0; font-size: var(--fs-xs); color: var(--violet-ink); }
+.ringcard__actions { display: flex; gap: 10px; }
+.ringcard__btn { flex: 1; justify-content: center; min-height: 48px; }
+@keyframes ringpulse { 0% { box-shadow: 0 0 0 0 rgba(var(--rani-rgb), .45); } 100% { box-shadow: 0 0 0 16px rgba(var(--rani-rgb), 0); } }
+@media (prefers-reduced-motion: reduce) { .ringcard__pulse, .ringcard { animation: none; } }
+
+.picker { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 50vh; overflow: auto; }
+.picker__row { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 12px; min-height: 52px; background: var(--cream); border: 1px solid var(--line); border-radius: var(--r-md); text-align: left; cursor: pointer; color: var(--plum); }
+.picker__row:hover { background: var(--blush); }
+.picker__name { flex: 1; font-weight: 600; overflow-wrap: anywhere; }
+.picker__status { font-size: var(--fs-xs); color: var(--ink-soft); }
+.picker__status.is-online { color: var(--mint-deep); font-weight: 600; }
+.picker__status.is-online::before { content: "● "; }
+.picker__msg { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--ink-soft); }
+.picker__confirm { display: grid; gap: 14px; }
+.picker__who { display: flex; align-items: center; gap: 14px; }
+.picker__who .avatar { border-radius: 50%; object-fit: cover; }
+.picker__big { margin: 0; font-weight: 700; font-size: var(--fs-lg, 1.125rem); color: var(--plum); }
+.picker__small { margin: 0; font-size: var(--fs-sm); color: var(--ink-soft); }
+.picker__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.picker__actions .btn { flex: 1 1 130px; justify-content: center; min-height: 44px; }

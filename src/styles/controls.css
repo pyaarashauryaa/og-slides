@@ -1,0 +1,115 @@
+/* ==========================================================================
+   OGSlides controls: the one small set of interactive building blocks.
+   Primary · Secondary · Ghost · Icon · Toggle · Chip (+ Danger, Link, Toolbar, Fields, Badges)
+   Existing class names are kept, so nothing in the components had to be rewritten.
+   Heights come from --ctl-*, shapes from --r-*, type from --fs-*, motion from --t-*.
+   ========================================================================== */
+
+/* ---- Buttons: Primary / Secondary / Ghost (+ Danger) ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  min-height: var(--ctl-lg);
+  padding: 0 20px;
+  border: 0; border-radius: var(--r-pill);
+  font-size: var(--fs-sm); font-weight: 600; line-height: 1.2;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn--small { min-height: var(--ctl-md); padding: 0 14px; }
+
+.btn--primary { background: var(--rani-strong); color: var(--paper); box-shadow: var(--shadow-brand); }
+.btn--primary:hover:not(:disabled) { background: var(--rani-ink); }
+
+/* Secondary. `btn--soft` is the original name and stays valid. */
+.btn--soft, .btn--secondary { background: var(--blush); color: var(--plum); }
+.btn--soft:hover:not(:disabled), .btn--secondary:hover:not(:disabled) { background: var(--blush-deep); }
+
+.btn--ghost { background: transparent; color: var(--plum); box-shadow: inset 0 0 0 1.5px var(--blush-deep); }
+.btn--ghost:hover:not(:disabled) { background: var(--blush); }
+
+.btn--danger { background: var(--danger); color: var(--paper); }
+.btn--danger:hover:not(:disabled) { background: color-mix(in srgb, var(--danger) 85%, black); }
+
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+
+/* Text-only link style button */
+.link-btn { display: inline-flex; align-items: center; gap: var(--s1); border: 0; background: none; padding: 0; color: var(--rani-ink); font-weight: 600; font-size: var(--fs-sm); }
+.link-btn:hover { text-decoration: underline; }
+
+/* ---- Icon button (square, quiet) ---- */
+.icon-btn {
+  display: inline-grid; place-items: center;
+  width: var(--ctl-md); height: var(--ctl-md);
+  border: 0; border-radius: var(--r-sm); background: transparent; color: var(--plum);
+  transition: background var(--t-fast) var(--ease);
+}
+.icon-btn:hover:not(:disabled) { background: var(--blush); }
+.icon-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.icon-btn--sm { width: 28px; height: 28px; }
+
+/* ---- Toggle (on/off square, e.g. Bold / Italic / list) ---- */
+.tg {
+  display: inline-grid; place-items: center;
+  width: var(--ctl-md); height: var(--ctl-md);
+  border: 0; border-radius: var(--r-sm); background: var(--lavender); color: var(--plum);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.tg:hover:not(:disabled) { background: var(--lavender-bright); }
+.tg[aria-pressed="true"] { background: var(--rani-strong); color: var(--paper); }
+.tg:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ---- Chip (selectable pill, e.g. fonts, alignment, categories) ---- */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: var(--ctl-sm); padding: 0 14px;
+  border: 0; border-radius: var(--r-pill);
+  background: var(--lavender); color: var(--plum);
+  font-size: var(--fs-sm); font-weight: 600;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.chip:hover:not(:disabled):not([aria-pressed="true"]) { background: var(--lavender-bright); }
+.chip[aria-pressed="true"] { background: var(--rani-strong); color: var(--paper); }
+.chip:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---- Toolbar button (icon + label, sits on a white bar) ---- */
+.tb-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: var(--ctl-md); padding: 0 10px;
+  border: 0; border-radius: var(--r-sm); background: transparent; color: var(--plum);
+  font-size: var(--fs-sm); font-weight: 600;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.tb-btn:hover:not(:disabled), .tb-btn[aria-expanded="true"] { background: var(--lavender); }
+.tb-btn:active:not(:disabled) { transform: translateY(1px); }
+.tb-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ---- Form fields ---- */
+.field { display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-sm); }
+.field > span { font-weight: 600; color: var(--plum); }
+.field small { color: var(--ink-soft); font-size: var(--fs-xs); }
+.field__conflict { background: var(--warn-soft); color: var(--warn-ink) !important; border-radius: var(--r-xs); padding: 6px 10px; }
+
+.field input, .field textarea, .num input, select {
+  font: inherit; font-size: var(--fs-sm); color: var(--ink);
+  min-height: var(--ctl-md); padding: 7px 12px;
+  border: 1.5px solid var(--blush-deep); border-radius: var(--r-sm); background: var(--paper);
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.field textarea { resize: vertical; }
+.field input:focus, .field textarea:focus, .num input:focus, select:focus {
+  outline: none; border-color: var(--rani); box-shadow: var(--focus-ring);
+}
+.num { display: flex; flex-direction: column; gap: 3px; font-size: var(--fs-xs); color: var(--ink-soft); font-weight: 600; }
+.num input { width: 100%; padding: 5px 8px; }
+
+/* ---- Badges (pill + save-status share one shape) ---- */
+.pill, .save {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 0; border-radius: var(--r-pill); padding: 4px 12px;
+  font-size: var(--fs-xs); font-weight: 600;
+}
+.pill--warn, .save { background: var(--lavender); color: var(--plum); }
+.pill--ok, .save--ok { background: var(--success-soft); color: var(--success-ink); }
+.save--warn { background: var(--warn-soft); color: var(--warn-ink); }
+.pill--bad, .save--bad { background: var(--danger-soft); color: var(--danger); }
+.pill__dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }

@@ -1,0 +1,179 @@
+/* OGSlides design tokens (APP INTERFACE ONLY).
+   Slide-theme colours live in src/slides/themes.js and are deliberately separate,
+   so changing the app's look never changes how a saved presentation or its export looks. */
+:root {
+  /* ---- Brand colours ---- */
+  --rani: #e85d9e;          /* vibrant rose: logo, accents, highlights, focus */
+  --rani-strong: #c23b80;   /* rose behind white text (passes contrast) */
+  --rani-ink: #a52a68;      /* pink used as text on cream */
+  --plum: #54213b;          /* deep plum: sidebar, headings */
+  --plum-deep: #3f1629;
+  --blush: #fce4ec;
+  --blush-deep: #f8c9d9;
+  --cream: #fff9f5;
+  --lavender: #f1eaff;
+  --lavender-bright: #b9a0f5;
+  --lavender-deep: #7c5cd6;
+  --mint: #a8e6c1;
+  --mint-deep: #1f9d6b;
+  --peach: #ffcfae;
+  --peach-soft: #ffe7d6;
+  --peach-deep: #e8833a;
+  --ink: #30243a;
+  --ink-soft: #6b6173;
+  --line: #f0e5eb;
+  --paper: #ffffff;
+  --glow: #ff6b9d;          /* light pink for use on plum (sidebar wordmark, focus) */
+
+  /* ---- Accent families (Phase 2). Each hue has: a bright tone for icons and dots,
+        a -strong tone that carries white text/icons, an -ink tone for text on its -soft tint,
+        and a -soft tint for backgrounds. Meaning: coral = creative highlights, teal = collaboration,
+        violet = secondary creative, sky = information and links, mint/success = done, butter = warm notes. ---- */
+  --coral: #ff7a59;   --coral-strong: #d4502c;  --coral-ink: #a53a1d;  --coral-soft: #ffe8df;
+  --teal: #2bbbad;    --teal-strong: #0f857d;   --teal-ink: #0b5f5a;   --teal-soft: #d9f4f1;
+  --violet: #8a6df0;  --violet-strong: #6244c9; --violet-ink: #4b30a8; --violet-soft: #ece6ff;
+  --sky: #4aa3e8;     --sky-strong: #1f74c4;    --sky-ink: #165a98;    --sky-soft: #e0effc;
+  --mint-soft: #e3f7ec;
+  --butter: #ffd96a;  --butter-soft: #fff3c4;   /* text on butter: --warn-ink */
+
+  /* The "current page accent". Pages override these (see shell.css), so headers, tiles and
+     highlights pick up the page's colour without extra classes. Brand actions stay rani. */
+  --accent: var(--rani);
+  --accent-strong: var(--rani-strong);
+  --accent-ink: var(--rani-ink);
+  --accent-soft: var(--blush);
+
+  /* ---- Status colours (background + readable text) ---- */
+  --danger: #c62828;
+  --danger-soft: #fde2e2;
+  --success: #1f9d6b;
+  --success-soft: #dff5ea;
+  --success-ink: #14694a;
+  --warn-soft: #fff3c4;
+  --warn-ink: #5c4400;
+
+  /* ---- Overlays and dark surfaces ---- */
+  --overlay: rgba(63, 22, 41, 0.45);
+  --stage-dark: #1d0f17;      /* present mode background */
+  --glass: rgba(255, 255, 255, 0.14);
+  --glass-soft: rgba(255, 255, 255, 0.08);
+
+  /* RGB triplets, for translucent versions of brand colours: rgba(var(--rani-rgb), .25) */
+  --rani-rgb: 232, 93, 158;
+  --plum-rgb: 84, 33, 59;
+
+  /* ---- Type ---- */
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+  --font-body: "Figtree", system-ui, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Seven deliberate sizes. Nothing in the app UI should use a size outside this list. */
+  --fs-xs: 12px;    /* captions, meta, small badges */
+  --fs-sm: 14px;    /* controls, secondary text */
+  --fs-md: 16px;    /* body */
+  --fs-lg: 18px;    /* card titles, lead text */
+  --fs-xl: 22px;    /* section and page titles, wordmark */
+  --fs-2xl: 28px;   /* page headings */
+  --fs-3xl: 36px;   /* hero (used with clamp) */
+
+  /* ---- Shape ---- */
+  --r-xs: 8px;      /* small inner parts: code chips, kbd */
+  --r-sm: 12px;     /* controls: toolbar buttons, inputs, menu rows */
+  --r-md: 16px;     /* cards inside panels, toasts, menus */
+  --r-lg: 24px;     /* panels, modals, big cards */
+  --r-pill: 999px;  /* buttons, chips, badges */
+
+  /* ---- Depth ---- */
+  --shadow-soft: 0 1px 2px rgba(var(--plum-rgb), 0.06), 0 8px 24px rgba(var(--plum-rgb), 0.06);
+  --shadow-lift: 0 2px 4px rgba(var(--plum-rgb), 0.08), 0 14px 32px rgba(var(--plum-rgb), 0.12);
+  --shadow-brand: 0 6px 16px rgba(var(--rani-rgb), 0.32);   /* primary button glow */
+  --focus-ring: 0 0 0 3px rgba(var(--rani-rgb), 0.28);      /* soft ring for inputs */
+
+  /* ---- Spacing ---- */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+
+  /* ---- Control heights (buttons, toolbar, inputs) ---- */
+  --ctl-sm: 32px;
+  --ctl-md: 36px;
+  --ctl-lg: 44px;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --t-fast: 120ms;
+  --t-base: 180ms;
+  --t-slow: 300ms;
+
+  /* ---- Stacking order (one place, so layers never fight) ---- */
+  --z-handle: 5;
+  --z-dropdown: 30;
+  --z-guide: 40;
+  --z-modal: 50;
+  --z-present: 60;
+  --z-toast: 80;
+}
+
+/* ==========================================================================
+   Phase 6 additions: semantic tokens, gradients, richer depth and motion.
+   Everything above stays valid, so no existing component had to change.
+   Breakpoints (CSS variables cannot be used inside @media, so they are written
+   out once here and used consistently): phone ≤ 560px · tablet ≤ 860px · laptop ≤ 1100px · desktop > 1100px.
+   ========================================================================== */
+:root {
+  /* ---- Semantic colours: components should prefer these over raw brand colours ---- */
+  --c-primary: var(--rani-strong);          /* main actions */
+  --c-primary-hover: var(--rani-ink);
+  --c-primary-2: var(--violet-strong);      /* second stop of the brand gradient */
+  --c-secondary-bg: var(--blush);           /* secondary actions */
+  --c-secondary-hover: var(--blush-deep);
+  --c-surface: var(--paper);                /* cards, panels */
+  --c-surface-tint: color-mix(in srgb, var(--lavender) 45%, var(--paper));
+  --c-canvas: var(--cream);                 /* page background */
+  --c-border: var(--line);
+  --c-border-strong: var(--blush-deep);
+  --c-text: var(--ink);
+  --c-text-muted: var(--ink-soft);
+  --c-heading: var(--plum);
+  --c-focus: var(--rani);
+  --c-success: var(--success);  --c-success-bg: var(--success-soft); --c-success-text: var(--success-ink);
+  --c-warning-bg: var(--warn-soft); --c-warning-text: var(--warn-ink); --c-warning: #a87600;
+  --c-error: var(--danger);     --c-error-bg: var(--danger-soft);
+  --midnight: #1a0f2e;                      /* deep violet-black for the sidebar and dark moments */
+  --midnight-2: #2a1445;
+
+  /* ---- Brand gradients (use on hero, primary buttons and small highlights, not on every card) ---- */
+  --grad-brand: linear-gradient(135deg, var(--rani-strong) 0%, var(--violet-strong) 100%);
+  --grad-brand-soft: linear-gradient(135deg, var(--blush) 0%, var(--lavender) 100%);
+  --grad-warm: linear-gradient(135deg, var(--coral) 0%, var(--rani) 100%);
+  --grad-cool: linear-gradient(135deg, var(--sky) 0%, var(--violet) 100%);
+  --grad-fresh: linear-gradient(135deg, var(--teal) 0%, var(--sky) 100%);
+  --grad-hero: linear-gradient(125deg, #7a2a66 0%, #5b34c4 50%, #2f6fc4 100%);
+  --grad-sidebar: linear-gradient(190deg, var(--plum) 0%, #3a1a4a 55%, var(--midnight) 100%);
+
+  /* ---- Depth ---- */
+  --shadow-glow: 0 10px 30px rgba(var(--rani-rgb), 0.28), 0 2px 6px rgba(var(--plum-rgb), 0.12);
+  --shadow-pop: 0 24px 60px rgba(var(--plum-rgb), 0.28), 0 4px 12px rgba(var(--plum-rgb), 0.12);
+  --ring-glow: 0 0 0 4px rgba(var(--rani-rgb), 0.22);
+
+  /* ---- Radii (additions) ---- */
+  --r-xl: 32px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);        /* quick start, soft landing */
+  --ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1); /* a small, controlled overshoot */
+  --t-slower: 520ms;
+
+  /* ---- Layout ---- */
+  --sidebar-w: 264px;
+  --sidebar-w-collapsed: 76px;
+
+  /* ---- Stacking (additions) ---- */
+  --z-sidebar: 20;
+  --z-palette: 70;
+  --z-tooltip: 90;
+}

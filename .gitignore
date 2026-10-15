@@ -1,0 +1,18 @@
+
+# Dependencies (downloaded again by "npm install", never committed)
+node_modules/
+
+# Build output
+dist/
+
+# Secret local settings: your CometChat App ID, Region and Auth Key live here.
+# These lines keep them out of GitHub.
+.env
+.env.*
+!.env.example
+
+# Logs and editor / operating-system clutter
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
